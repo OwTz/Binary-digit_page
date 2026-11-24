@@ -14,7 +14,7 @@ export const BYTE_RANGE = {
 } as const;
 
 export function calculateDecimal(bits: ByteState): number {
-  return bits.reduce((acc, bit, index) => {
+  return bits.reduce<number>((acc, bit, index) => {
     return acc + bit * BIT_WEIGHTS[index];
   }, 0);
 }
