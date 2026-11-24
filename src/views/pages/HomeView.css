@@ -1,11 +1,20 @@
-/* HomeView: centralização total e responsividade */
-.home-container {
+/* Layout global da página com flex para posicionar o rodapé sem afetar o centro */
+.home-layout {
   min-height: 100vh;
   min-height: 100dvh;
   display: flex;
+  flex-direction: column;
+  position: relative;
+  background-color: #0d1117;
+}
+
+/* HomeView: centralização total e responsividade */
+.home-container {
+  flex: 1 0 auto;
+  display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1rem;
+  padding: 1.5rem 1rem;
   box-sizing: border-box;
 }
 
@@ -74,7 +83,7 @@
   transition: stroke 0.2s ease;
 }
 
-/* Estado aceso: brilho estático de alto contraste */
+/* Estado aceso: brilho de alto contraste */
 .bulb-on .bulb-glass {
   filter: drop-shadow(0 0 14px rgba(255, 183, 3, 0.75));
 }
@@ -93,7 +102,6 @@
   font-family: 'Courier New', Courier, monospace;
   font-weight: 700;
   color: #f8f9fa;
-  /* Fonte menor que o conjunto das lâmpadas, mas grande e de alto contraste */
   font-size: clamp(2.5rem, 7vw, 6.5rem);
   line-height: 1;
   letter-spacing: 0.05em;
@@ -106,6 +114,75 @@
   color: #adb5bd;
   margin-top: clamp(0.35rem, 1vh, 0.8rem);
   letter-spacing: 0.05em;
+}
+
+/* Rodapé (Footer) */
+.home-footer {
+  flex-shrink: 0;
+  width: 100%;
+  padding: 1rem 1.5rem;
+  box-sizing: border-box;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  background-color: rgba(13, 17, 23, 0.95);
+}
+
+.footer-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 1rem;
+}
+
+/* Texto de autoria à esquerda */
+.footer-author {
+  font-size: clamp(0.8rem, 1.5vw, 0.95rem);
+  color: #8b949e;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+/* Divisão à direita com o box de redes sociais */
+.footer-social-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.social-box {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #8b949e;
+  padding: 0.4rem;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: color 0.2s ease, transform 0.2s ease, background-color 0.2s ease;
+}
+
+.social-link:hover {
+  color: #ffb703;
+  background-color: rgba(255, 183, 3, 0.1);
+  transform: translateY(-2px);
+}
+
+.social-link:focus-visible {
+  outline: 2px solid #ffb703;
+  outline-offset: 2px;
+}
+
+.social-icon {
+  width: clamp(18px, 2.2vw, 22px);
+  height: clamp(18px, 2.2vw, 22px);
+  display: block;
 }
 
 /* Adaptação para Telas Grandes / Apresentação em TV */
@@ -130,9 +207,35 @@
   .decimal-range {
     font-size: 2.2rem;
   }
+
+  .footer-content {
+    max-width: 1500px;
+  }
+
+  .footer-author {
+    font-size: 1.2rem;
+  }
+
+  .social-icon {
+    width: 28px;
+    height: 28px;
+  }
 }
 
-/* Celulares ultra estreitos (320px) */
+/* Celulares com tela estreita: empilhamento harmonioso no rodapé */
+@media (max-width: 600px) {
+  .footer-content {
+    flex-direction: column-reverse;
+    justify-content: center;
+    gap: 0.75rem;
+    text-align: center;
+  }
+
+  .social-box {
+    gap: 1.2rem;
+  }
+}
+
 @media (max-width: 360px) {
   .home-container {
     padding: 0.5rem;
