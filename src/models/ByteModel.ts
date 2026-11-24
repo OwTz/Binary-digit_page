@@ -14,9 +14,11 @@ export const BYTE_RANGE = {
 } as const;
 
 export function calculateDecimal(bits: ByteState): number {
-  return bits.reduce<number>((acc, bit, index) => {
-    return acc + bit * BIT_WEIGHTS[index];
-  }, 0);
+  let total = 0;
+  for (let i = 0; i < bits.length; i++) {
+    total += bits[i] * BIT_WEIGHTS[i];
+  }
+  return total;
 }
 
 export function toggleBitAtIndex(bits: ByteState, index: number): ByteState {
